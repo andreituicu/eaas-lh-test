@@ -20,15 +20,21 @@ async function loadLighouseViewer() {
     window.location = '/404.html';
   }
 
-  const searchParams = new URLSearchParams(window.location.search);
-  const psiReportPath = searchParams.get('jsonurl');
-  const psiReport = await fetchAPI(psiReportPath);
-
-  var psiReportBlob = new Blob([JSON.stringify(psiReport)], {type: "application/json"});
-  var psiReportBlobUrl  = URL.createObjectURL(psiReportBlob);
-
   const iframe = document.createElement('iframe');
-  iframe.src = psiReportBlobUrl;
+  const viewerUrl = new URL('https://googlechrome.github.io/lighthouse/viewer/');
+  const searchParams = new URLSearchParams(window.location.search);
+
+  if (searchParams.get('jsonurl')) {
+    const psiReportPath = searchParams.get('jsonurl');
+    const psiReport = await fetchAPI(psiReportPath);
+
+    var psiReportBlob = new Blob([JSON.stringify(psiReport)], {type: "application/json"});
+    var psiReportBlobUrl  = URL.createObjectURL(psiReportBlob);
+
+    viewerUrl.searchParams.set('jsonurl', psiReportBlobUrl);
+  }
+
+  iframe.src = viewerUrl;
   document.querySelector('body').appendChild(iframe);
 }
 
