@@ -32,11 +32,13 @@ async function loadLighouseViewer() {
     var psiReportBlobUrl  = URL.createObjectURL(psiReportBlob);
 
     viewerUrl.searchParams.set('jsonurl', psiReportBlobUrl);
-
-    console.log(await fetchAPI(psiReportBlobUrl));
+    const link = document.createElement('a');
+    a.href = viewerUrl.toString();
+    a.textContent = 'test';
+    document.querySelector('body').appendChild(link);
   }
 
-  iframe.src = viewerUrl;
+  iframe.src = viewerUrl.toString();
   iframe.style.cssText = "overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px";
   document.querySelector('body').appendChild(iframe);
 }
