@@ -16,6 +16,7 @@ async function fetchAPI(path) {
 }
 
 async function loadLighouseViewer() {
+  console.log(window.location);
   if (!window.location.domain.endsWith('.hlx.page')) {
     window.location = '/404.html';
   }
