@@ -29,11 +29,11 @@ async function loadLighouseViewer() {
     const psiReport = await fetchAPI(psiReportPath);
 
     var psiReportBlob = new Blob([JSON.stringify(psiReport)], {type: "application/json"});
-    var psiReportBlobUrl  = URL.createObjectURL(psiReportBlob);
+    var psiReportBlobUrl = URL.createObjectURL(psiReportBlob);
 
     viewerUrl.searchParams.set('jsonurl', psiReportBlobUrl);
     const link = document.createElement('a');
-    link.href = viewerUrl.toString();
+    link.href = psiReportBlobUrl;
     link.textContent = 'test';
     document.querySelector('body').appendChild(link);
   }
