@@ -21,7 +21,7 @@ async function loadLighouseViewer() {
   }
 
   const iframe = document.createElement('iframe');
-  const viewerUrl = new URL('https://googlechrome.github.io/lighthouse/viewer/');
+  const viewerUrl = new URL('https://psi.experiencecloud.live/viewer/');
   const searchParams = new URLSearchParams(window.location.search);
 
   if (searchParams.get('jsonurl')) {
@@ -35,7 +35,7 @@ async function loadLighouseViewer() {
     const link = document.createElement('a');
     link.href = psiReportBlobUrl;
     link.textContent = 'test';
-    document.querySelector('body').appendChild(link);
+    document.querySelector('body').appendChild(link);    
   }
 
   iframe.src = viewerUrl.toString();
