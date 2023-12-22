@@ -33,8 +33,8 @@ async function loadLighouseViewer() {
 
     viewerUrl.searchParams.set('jsonurl', psiReportBlobUrl);
     const link = document.createElement('a');
-    a.href = viewerUrl.toString();
-    a.textContent = 'test';
+    link.href = viewerUrl.toString();
+    link.textContent = 'test';
     document.querySelector('body').appendChild(link);
   }
 
