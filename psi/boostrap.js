@@ -32,6 +32,8 @@ async function loadLighouseViewer() {
     var psiReportBlobUrl  = URL.createObjectURL(psiReportBlob);
 
     viewerUrl.searchParams.set('jsonurl', psiReportBlobUrl);
+
+    console.log(await fetchAPI(psiReportBlobUrl));
   }
 
   iframe.src = viewerUrl;
