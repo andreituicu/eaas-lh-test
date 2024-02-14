@@ -15,6 +15,13 @@ async function fetchAPI(path) {
   return json;
 }
 
+window.addEventListener(
+  "message",
+  (event) => {
+    console.log('received message', event);
+  },
+);
+
 async function loadLighouseViewer() {
   if (!window.location.host.endsWith('.hlx.page')) {
     window.location = '/404.html';
@@ -31,16 +38,15 @@ async function loadLighouseViewer() {
     const psiReportPath = searchParams.get('jsonurl');
     const psiReport = await fetchAPI(psiReportPath);
 
-    iframe.onload = function () {
-      iframe.contentWindow.postMessage(
-        {
-          lhr: psiReport, 
-        },
-        iframeOrigin,
-      );
-    };
+    // iframe.onload = function () {
+    //   iframe.contentWindow.postMessage(
+    //     {
+    //       lhr: psiReport, 
+    //     },
+    //     iframeOrigin,
+    //   );
+    // };
   }
-
 }
 
 loadLighouseViewer();
