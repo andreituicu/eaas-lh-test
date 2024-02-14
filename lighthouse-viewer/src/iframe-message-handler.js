@@ -8,7 +8,7 @@ window.addEventListener(
       var psiReportBlob = new Blob([JSON.stringify(event.data.report)], {type: "application/json"});
       var psiReportBlobUrl = URL.createObjectURL(psiReportBlob);
       console.log('psiReportBlobUrl', psiReportBlobUrl);
-      console.logl('location.href', location.href);
+      console.log('location.href', location.href);
       location.href = `${location.href}?jsonurl=${psiReportBlobUrl}`;
     }
   },
