@@ -15,22 +15,33 @@ async function fetchAPI(path) {
   return json;
 }
 
-window.addEventListener(
-  "message",
-  (event) => {
-    console.log('received message', event);
-  },
-);
+async function loadCSS(href) {
+  return new Promise((resolve, reject) => {
+    if (!document.querySelector(`head > link[href="${href}"]`)) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = href;
+      link.onload = resolve;
+      link.onerror = reject;
+      document.head.append(link);
+    } else {
+      resolve();
+    }
+  });
+}
 
 async function loadLighouseViewer() {
   if (!window.location.host.endsWith('.hlx.page')) {
     window.location = '/404.html';
   }
 
+  const { origin } = new URL(import.meta.url);
+  await loadCSS(new URL('/styles/dapreview.css', origin).toString());
+
   const iframe = document.createElement('iframe');
   const iframeOrigin = 'https://local-viewer--eaas-lh-test--andreituicu.hlx.page';
   iframe.src = `${iframeOrigin}/lighthouse-viewer/index.html`;
-  iframe.style.cssText = "overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px";
+  // iframe.style.cssText = "overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px";
   document.querySelector('body').appendChild(iframe);
 
   const searchParams = new URLSearchParams(window.location.search);
