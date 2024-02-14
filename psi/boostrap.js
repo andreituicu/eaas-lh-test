@@ -38,14 +38,15 @@ async function loadLighouseViewer() {
     const psiReportPath = searchParams.get('jsonurl');
     const psiReport = await fetchAPI(psiReportPath);
 
-    // iframe.onload = function () {
-    //   iframe.contentWindow.postMessage(
-    //     {
-    //       lhr: psiReport, 
-    //     },
-    //     iframeOrigin,
-    //   );
-    // };
+    iframe.onload = function () {
+      iframe.contentWindow.postMessage(
+        {
+          report: psiReport,
+          type: 'lighthouse-report',
+        },
+        iframeOrigin,
+      );
+    };
   }
 }
 
