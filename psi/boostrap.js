@@ -21,7 +21,7 @@ async function loadLighouseViewer() {
   }
 
   const iframe = document.createElement('iframe');
-  const iframeOrigin = 'https://local-viewer--eaas-lh-test--andreituicu.hlx.live';
+  const iframeOrigin = 'https://local-viewer--eaas-lh-test--andreituicu.hlx.page';
   iframe.src = `${iframeOrigin}/lighthouse-viewer/index.html`;
   iframe.style.cssText = "overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px";
   document.querySelector('body').appendChild(iframe);
@@ -32,6 +32,7 @@ async function loadLighouseViewer() {
     const psiReport = await fetchAPI(psiReportPath);
 
     iframe.onload = function () {
+      console.log('posting message to iframe', psiReport, iframeOrigin);
       iframe.contentWindow.postMessage(psiReport, iframeOrigin);
     };
 
