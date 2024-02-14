@@ -34,8 +34,7 @@ async function loadLighouseViewer() {
     iframe.onload = function () {
       iframe.contentWindow.postMessage(
         {
-          report: psiReport, 
-          type: 'lighthouse-report',
+          lhr: psiReport, 
         },
         iframeOrigin,
       );
