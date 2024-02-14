@@ -46,6 +46,11 @@ async function loadLighouseViewer() {
         },
         iframeOrigin,
       );
+
+      setTimeout(() => {
+         console.log(window);
+         console.log(window.viewer);
+      }, 3000);
     };
   }
 }
