@@ -3,7 +3,7 @@
 window.addEventListener(
   "message",
   (event) => {
-    console.log(e.source);
+    console.log(event.source);
     console.log(self.opener);
     if (!(event.origin.endsWith('hlx.page')|| event.origin.endsWith('aem.page'))) return;
     if (event.data.type === 'lighthouse-report') {
