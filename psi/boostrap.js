@@ -32,12 +32,14 @@ async function loadLighouseViewer() {
     const psiReport = await fetchAPI(psiReportPath);
 
     iframe.onload = function () {
-      console.log('posting message to iframe', psiReport, iframeOrigin);
-      iframe.contentWindow.postMessage(psiReport, iframeOrigin);
+      iframe.contentWindow.postMessage(
+        {
+          report: psiReport, 
+          type: 'lighthouse-report',
+        },
+        iframeOrigin,
+      );
     };
-
-    //var psiReportBlob = new Blob([JSON.stringify(psiReport)], {type: "application/json"});
-    // var psiReportBlobUrl = URL.createObjectURL(psiReportBlob);
   }
 
 }
