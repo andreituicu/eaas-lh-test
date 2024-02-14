@@ -36,7 +36,7 @@ async function loadLighouseViewer() {
   }
 
   const { origin } = new URL(import.meta.url);
-  await loadCSS(new URL('/styles/dapreview.css', origin).toString());
+  await loadCSS(new URL('/psi/boostrap.css', origin).toString());
 
   const iframe = document.createElement('iframe');
   const iframeOrigin = 'https://local-viewer--eaas-lh-test--andreituicu.hlx.page';
