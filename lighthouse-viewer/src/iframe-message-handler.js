@@ -1,6 +1,7 @@
 window.addEventListener(
   "message",
   (event) => {
+    console.log(event);
     if (!(event.origin.endsWith('.hlx.page')|| event.origin.endsWith('.aem.page'))) return;
     if (event.data.type === 'lighthouse-report') {
       window.viewer._replaceReportHtml(event.data.report);
@@ -11,6 +12,5 @@ window.addEventListener(
 
 // we are in an iframe - let the parent know we are ready
 if (window !== window.parent) {
-  console.log('sending ready message');
   window.parent.postMessage({opened: true}, '*');
 }
