@@ -43,14 +43,16 @@ async function loadLighouseViewer() {
   const iframeOrigin = 'https://local-viewer--eaas-lh-test--andreituicu.hlx.page';
   // this would be https://psi.experiencecloud.live/viewer/
   iframe.src = `${iframeOrigin}/lighthouse-viewer/index.html`;
-  document.querySelector('body').appendChild(iframe);
 
   const searchParams = new URLSearchParams(window.location.search);
   if (searchParams.get('jsonurl')) {
     const psiReportPath = searchParams.get('jsonurl');
     const psiReport = await fetchAPI(psiReportPath);
 
-    iframe.onload = function () {
+    window.addEventListener("message", (event) => {
+      if (event.origin !== iframeOrigin) return;
+      if (!event.data.opened) return;
+
       iframe.contentWindow.postMessage(
         {
           report: psiReport,
@@ -58,8 +60,11 @@ async function loadLighouseViewer() {
         },
         iframeOrigin,
       );
-    };
+    });
+
   }
+
+  document.querySelector('body').appendChild(iframe);
 }
 
 loadLighouseViewer();
