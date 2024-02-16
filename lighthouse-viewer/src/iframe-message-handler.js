@@ -13,4 +13,6 @@ window.addEventListener(
 if (window !== window.parent) {
   console.log('sending ready message');
   window.parent.postMessage({rendered: true}, '*');
+} else {
+  console.log('not in iframe');
 }
